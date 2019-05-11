@@ -10,9 +10,9 @@ $usercek=$usersor->fetch(PDO::FETCH_ASSOC);
 
 //adres sor
 
-$adressor=$db->prepare("SELECT * FROM addresses WHERE user_id =:id ");
+$adressor=$db->prepare("SELECT * FROM addresses WHERE id=:id ");
 $adressor->execute(array(
-    'user_id'=>1
+    'id'=>1
 ));
 $adrescek=$adressor->fetch(PDO::FETCH_ASSOC);
 

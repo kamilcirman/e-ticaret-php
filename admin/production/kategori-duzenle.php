@@ -1,11 +1,14 @@
 <?php
 include 'header.php';
-//adres sor
-$adressor=$db->prepare("SELECT * FROM addresses WHERE user_id=:id ");
-$adressor->execute(array(
-    'id'=>1
+
+$kategorisor=$db->prepare("SELECT * FROM categories  WHERE id=:id");
+$kategorisor->execute(array(
+  'id' =>$_GET['id']
+
 ));
-$adrescek=$adressor->fetch(PDO::FETCH_ASSOC);
+
+$kategoricek=$kategorisor->fetch(PDO::FETCH_ASSOC);
+
 ?>
         <!-- page content -->
         <div class="right_col" role="main">
@@ -16,7 +19,7 @@ $adrescek=$adressor->fetch(PDO::FETCH_ASSOC);
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Adres Ayarlar <small>
+                    <h2>Kategori düzenle <small>
                     
                     <?php
 
@@ -54,35 +57,47 @@ $adrescek=$adressor->fetch(PDO::FETCH_ASSOC);
                     <form action="../netting/islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Adres <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori Adı <span class="required"></span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="address" value="<?php echo $adrescek['address']?> " required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                    
-                     
-                    
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Oluşturulma Tarihi <span class="required"></span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="created_at" value="<?php echo $adrescek['created_at']?>" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="category_name" value="<?php echo $kategoricek['category_name']?>" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Güncelleme Tarihi <span class="required"></span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Url <span class="required"></span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="updated_at" value="<?php echo $adrescek['updated_at']?>" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="category_slug" value="<?php echo $kategoricek['category_slug']?>" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-                  
-                  
+                   
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Oluşturulma Tarihi <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="created_at" value="<?php echo $kategoricek['created_at']?>" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Güncelleme Tarihi<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="updated_at" value="<?php echo $kategoricek['updated_at']?>" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Durum<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="durum" value="<?php echo $kategoricek['durum']?>" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                      <input type="hidden" name="id" value="<?php echo $kategoricek['id'] ?>">
                       <div class="ln_solid"></div>
                       <div class="form-group">
-                        <div align="right" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button type="submit" name="adreskaydet" class="btn btn-success">Güncelle</button>
+                        <div align ="right" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <button type="submit" name="kategoriduzenle" class="btn btn-success">Düzenle</button>
                         </div>
                       </div>
 

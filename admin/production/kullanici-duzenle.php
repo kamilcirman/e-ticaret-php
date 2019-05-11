@@ -1,11 +1,14 @@
 <?php
 include 'header.php';
-//adres sor
-$adressor=$db->prepare("SELECT * FROM addresses WHERE user_id=:id ");
-$adressor->execute(array(
-    'id'=>1
+
+$usersor=$db->prepare("SELECT * FROM users");
+$usersor->execute(array(
+  'id' =>$_GET['id']
+
 ));
-$adrescek=$adressor->fetch(PDO::FETCH_ASSOC);
+
+$usercek=$usersor->fetch(PDO::FETCH_ASSOC);
+
 ?>
         <!-- page content -->
         <div class="right_col" role="main">
@@ -16,7 +19,7 @@ $adrescek=$adressor->fetch(PDO::FETCH_ASSOC);
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Adres Ayarlar <small>
+                    <h2>kullanıcı düzenle <small>
                     
                     <?php
 
@@ -54,35 +57,46 @@ $adrescek=$adressor->fetch(PDO::FETCH_ASSOC);
                     <form action="../netting/islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Adres <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kullanıcı Adı <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="address" value="<?php echo $adrescek['address']?> " required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                    
-                     
-                    
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Oluşturulma Tarihi <span class="required"></span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="created_at" value="<?php echo $adrescek['created_at']?>" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="username" value="<?php echo $usercek['username']?>" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Güncelleme Tarihi <span class="required"></span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" name="updated_at" value="<?php echo $adrescek['updated_at']?>" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="first-name" name="email" disable="" value="<?php echo $usercek['email']?>" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-                  
-                  
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Password <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="password" value="<?php echo $usercek['password']?>" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ad <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="name" value="<?php echo $usercek['name']?>" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Soy Ad <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="first-name" name="surname" value="<?php echo $usercek['surname']?>" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+                      <input type="hidden" name="id" value="<?php echo $usercek['id'] ?>">
                       <div class="ln_solid"></div>
                       <div class="form-group">
-                        <div align="right" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button type="submit" name="adreskaydet" class="btn btn-success">Güncelle</button>
+                        <div align ="right" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <button type="submit" name="kullaniciguncelle" class="btn btn-success">Güncelle</button>
                         </div>
                       </div>
 

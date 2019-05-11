@@ -1,4 +1,8 @@
 <?php
+
+ob_start();
+session_start();
+
 include '../netting/baglan.php';
 //usersor
 $usersor=$db->prepare("SELECT * FROM users WHERE id=:id ");
@@ -7,20 +11,18 @@ $usersor->execute(array(
 ));
 $usercek=$usersor->fetch(PDO::FETCH_ASSOC);
 
-
-//adres sor
-$adressor=$db->prepare("SELECT * FROM addresses WHERE user_id=:id ");
-$adressor->execute(array(
-    'id'=>1
+//session isim çekme
+$kullanicisor=$db->prepare("SELECT * FROM users WHERE username=:username ");
+$kullanicisor->execute(array(
+    'username'=>$_SESSION['username']
 ));
-$adrescek=$adressor->fetch(PDO::FETCH_ASSOC);
+$say=$kullanicisor -> rowCount();
+$kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
+if ($say==0) {
+  Header("Location:login.php?durum=izinsiz");
+  exit;
+}
 
-//hakkimizda sor
-$hakkimizdasor=$db->prepare("SELECT * FROM about WHERE id=:id ");
-$hakkimizdasor->execute(array(
-    'id'=>0
-));
-$hakkimizdacek=$hakkimizdasor->fetch(PDO::FETCH_ASSOC);
 ?>
 
 
@@ -74,8 +76,8 @@ $hakkimizdacek=$hakkimizdasor->fetch(PDO::FETCH_ASSOC);
                 <img src="images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>HOŞGELDİN,</span>
+                <h2><?php echo $kullanicicek['name'];?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -88,10 +90,16 @@ $hakkimizdacek=$hakkimizdasor->fetch(PDO::FETCH_ASSOC);
                 <h3>Genel</h3>
                 <ul class="nav side-menu">
                 <li><a href="index.php"><i class="fa fa-home"></i> Ana Sayfa </a></li>
+
                 <li><a href="hakkimizda.php"><i class="fa fa-info"></i> Hakkımızda </a></li>
+
+                <li><a href="kullanici.php"><i class="fa fa-user"></i> Kullanıcılar </a></li>
+
+                <li><a href="kategori.php"><i class="fa fa-bookmark"></i> Kategori </a></li>
+
                   <li><a><i class="fa fa-cogs"></i> Ayarlar <span class="fa fa-cogs"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href= "kullanıcı_islemleri.php" >Kullanıcı Ayarları</a></li>
+                      <li><a href= "kullanici-islemleri.php" >Kullanıcı Ayarları</a></li>
                       <li><a href= "iletisim_ayarlar.php" >İletişim Ayarlar</a></li>
                      
                     </ul>
@@ -132,19 +140,13 @@ $hakkimizdacek=$hakkimizdasor->fetch(PDO::FETCH_ASSOC);
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt=""><?php echo $kullanicicek['name']?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+
+                    <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
