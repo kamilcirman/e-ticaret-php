@@ -1,5 +1,11 @@
 <?php
 include '../admin/netting/baglan.php';
+include '../admin/production/fonksiyon.php';
+
+
+
+
+
 //usersor
 $usersor=$db->prepare("SELECT * FROM users WHERE id=:id ");
 $usersor->execute(array(
@@ -224,111 +230,46 @@ $adrescek=$adressor->fetch(PDO::FETCH_ASSOC);
                 <!-- Categories List Start -->
                 <div class="col-10 col-lg-3">
                     <div class="categories-list-wrap">
-                        <button class="btn btn-category d-none d-lg-inline-block"><i class="fa fa-bars"></i> Categories
+                        <button class="btn btn-category d-none d-lg-inline-block"><i class="fa fa-bars"></i> Kategoriler
                         </button>
                         <ul class="category-list-menu">
+                            
+
+                            <?php
+                        $kategorisor=$db->prepare("SELECT * FROM categories WHERE durum=:durum ORDER BY id ASC ");
+                        $kategorisor->execute(array(
+
+                            'durum' => 1
+                        ));
+                        while($kategoricek=$kategorisor->fetch(PDO::FETCH_ASSOC)){
+                        
+                        
+                        ?>
                             <li class="category-item-parent dropdown-show">
-                                <a href="#" class="category-item arrow-toggle">
-                                    <img src="assets/img/icons/desktop.png" alt="Computer"/>
-                                    <span>Computer</span>
+                                <a href="
+                                
+                                <?php
+                                if ($kategoricek['category_slug']) {
+                                   echo $kategoricek['category_slug'];
+                                }
+                                else{
+                                    echo "sayfa-".seo($kategoricek['category_name']);
+                                }
+
+
+                                ?>" 
+                                class="category-item arrow-toggle">
+                                    <span><?php echo $kategoricek['category_name']?></span>
                                 </a>
-                                <ul class="mega-menu-wrap dropdown-nav">
-                                    <li class="mega-menu-item"><a href="#" class="mega-item-title">Laptop</a>
-                                        <ul>
-                                            <li><a href="#">Has Laptop Price</a></li>
-                                            <li><a href="#">Has Laptop Ram</a></li>
-                                            <li><a href="#">Has Laptop Rom</a></li>
-                                            <li><a href="#">Has Laptop SSD</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="mega-menu-item"><a href="#" class="mega-item-title">Desktop</a>
-                                        <ul>
-                                            <li><a href="#">Has Laptop Price</a></li>
-                                            <li><a href="#">Has Laptop Ram</a></li>
-                                            <li><a href="#">Has Laptop Rom</a></li>
-                                            <li><a href="#">Has Laptop SSD</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="mega-menu-item"><a href="#" class="mega-item-title">Notebook</a>
-                                        <ul>
-                                            <li><a href="#">Has Laptop Price</a></li>
-                                            <li><a href="#">Has Laptop Ram</a></li>
-                                            <li><a href="#">Has Laptop Rom</a></li>
-                                            <li><a href="#">Has Laptop SSD</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                        <?php }?>
+                                
                             </li>
 
-                            <li class="category-item-parent dropdown-show">
-                                <a href="#" class="category-item arrow-toggle">
-                                    <img src="assets/img/icons/mobile.png" alt="Mobile"/>
-                                    <span>Mobile</span>
-                                </a>
-                                <ul class="mega-menu-wrap dropdown-nav">
-                                    <li class="mega-menu-item"><a href="#" class="mega-item-title">Sumsang</a>
-                                        <ul>
-                                            <li><a href="#">Sumsang S6</a></li>
-                                            <li><a href="#">Sumsang S7</a></li>
-                                            <li><a href="#">Sumsang Prime</a></li>
-                                            <li><a href="#">Sumsang A6</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="mega-menu-item"><a href="#" class="mega-item-title">Ziaomi</a>
-                                        <ul>
-                                            <li><a href="#">Ziaomi A2 Pro</a></li>
-                                            <li><a href="#">Ziaomi MIX 2</a></li>
-                                            <li><a href="#">Ziaomi F1</a></li>
-                                            <li><a href="#">Ziaomi Prime</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="mega-menu-item"><a href="#" class="mega-item-title">Jamila</a>
-                                        <ul>
-                                            <li><a href="#">Jamila G100</a></li>
-                                            <li><a href="#">Jamila i120</a></li>
-                                            <li><a href="#">Jamila i15</a></li>
-                                            <li><a href="#">Jamila L62</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="mega-menu-item"><a href="#" class="mega-item-title">Nakoa</a>
-                                        <ul>
-                                            <li><a href="#">Nakoa Lamia 820</a></li>
-                                            <li><a href="#">Nakoa 888 Pro</a></li>
-                                            <li><a href="#">Nakoa 81 Sirocco</a></li>
-                                            <li><a href="#">Nakoa Lamia 1520</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="category-item-parent">
-                                <a href="#" class="category-item">
-                                    <img src="assets/img/icons/camera.png" alt="Camera"/>
-                                    <span>Camera</span>
-                                </a>
-                            </li>
-                            <li class="category-item-parent">
-                                <a href="#" class="category-item">
-                                    <img src="assets/img/icons/fan.png" alt="Camera"/>
-                                    <span>Electronics</span>
-                                </a>
-                            </li>
-                            <li class="category-item-parent">
-                                <a href="#" class="category-item">
-                                    <img src="assets/img/icons/games.png" alt="Camera"/>
-                                    <span>Gaming</span>
-                                </a>
-                            </li>
-                            <li class="category-item-parent">
-                                <a href="#" class="category-item">
-                                    <img src="assets/img/icons/tv.png" alt="Camera"/>
-                                    <span>Entertainment</span>
-                                </a>
-                            </li>
+                            
+                           
+                            
+                          
+                            
                             <li class="category-item-parent">
                                 <a href="#" class="category-item btn-more">More Categories</a>
                             </li>
@@ -340,124 +281,117 @@ $adrescek=$adressor->fetch(PDO::FETCH_ASSOC);
                 <!-- Main Menu Start -->
                 <div class="col-2 col-lg-9 d-none d-lg-block">
                     <div class="main-menu-wrap">
-                        <nav class="mainmenu">
-    <ul class="main-navbar clearfix">
-        <li class="dropdown-show"><a href="index.html" class="arrow-toggle">Home</a>
-            <ul class="dropdown-nav sub-dropdown">
-                <li><a href="index.html">Home Layout 1</a></li>
-                <li><a href="index2.html">Home Layout 2</a></li>
-                <li><a href="index3.html">Home Layout 3</a></li>
-                <li><a href="index4.html">Home Layout 4</a></li>
-            </ul>
-        </li>
-        <li><a href="hakkimizda.php">About Us</a></li>
-        <li class="dropdown-show"><a href="#" class="arrow-toggle">Shop</a>
-            <ul class="mega-menu-wrap dropdown-nav">
-                <li class="mega-menu-item"><a href="shop.html" class="mega-item-title">Shop PageLayout</a>
-                    <ul>
-                        <li><a href="shop-3-grid.html">Shop 3 Column</a></li>
-                        <li><a href="shop-4-grid.html">Shop 4 Column</a></li>
-                        <li><a href="shop.html">Shop Left Sidebar</a></li>
-                        <li><a href="shop-list.html">Shop Lsiting View</a></li>
-                        <li><a href="shop-right-sidebar.html">Shop Right Sidebar</a></li>
-                        <li><a href="shop-list-left-sidebar.html">Shop Lsit left Sidebar</a></li>
-                        <li><a href="shop-list-right-sidebar.html">Shop Lsit Right Sidebar</a></li>
-                    </ul>
-                </li>
+<nav class="mainmenu">
+                <ul class="main-navbar clearfix">
+                    <li class="dropdown-show"><a href="index.php" >Home</a></li>
+                    <li><a href="hakkimizda.php">About Us</a></li>
+                    <li class="dropdown-show"><a href="#" class="arrow-toggle">Shop</a>
+                        <ul class="mega-menu-wrap dropdown-nav">
+                            <li class="mega-menu-item"><a href="shop.html" class="mega-item-title">Shop PageLayout</a>
+                                <ul>
+                                    <li><a href="shop-3-grid.html">Shop 3 Column</a></li>
+                                    <li><a href="shop-4-grid.html">Shop 4 Column</a></li>
+                                    <li><a href="shop.html">Shop Left Sidebar</a></li>
+                                    <li><a href="shop-list.html">Shop Lsiting View</a></li>
+                                    <li><a href="shop-right-sidebar.html">Shop Right Sidebar</a></li>
+                                    <li><a href="shop-list-left-sidebar.html">Shop Lsit left Sidebar</a></li>
+                                    <li><a href="shop-list-right-sidebar.html">Shop Lsit Right Sidebar</a></li>
+                                </ul>
+                            </li>
 
-                <li class="mega-menu-item"><a href="single-product.html" class="mega-item-title">Single
-                    Products Style</a>
-                    <ul>
-                        <li><a href="single-product-carousel.html">Single Product Carousel</a></li>
-                        <li><a href="single-product-sticky-left.html">Single Product Sticky Left</a></li>
-                        <li><a href="single-product-sticky-right.html">Single Product Sticky Right</a></li>
-                        <li><a href="single-product-gallery-left.html">Single Product Gallery Left</a></li>
-                        <li><a href="single-product-gallery-right.html">Single Product Gallery Right</a></li>
-                        <li><a href="single-product-tab-style-top.html">Single Product Tab Style Top</a></li>
-                        <li><a href="single-product-tab-style-left.html">Single Product Tab Style Left</a></li>
-                        <li><a href="single-product-tab-style-right.html">Single Product Tab Style Right</a></li>
-                    </ul>
-                </li>
+                            <li class="mega-menu-item"><a href="single-product.html" class="mega-item-title">Single
+                                Products Style</a>
+                                <ul>
+                                    <li><a href="single-product-carousel.html">Single Product Carousel</a></li>
+                                    <li><a href="single-product-sticky-left.html">Single Product Sticky Left</a></li>
+                                    <li><a href="single-product-sticky-right.html">Single Product Sticky Right</a></li>
+                                    <li><a href="single-product-gallery-left.html">Single Product Gallery Left</a></li>
+                                    <li><a href="single-product-gallery-right.html">Single Product Gallery Right</a></li>
+                                    <li><a href="single-product-tab-style-top.html">Single Product Tab Style Top</a></li>
+                                    <li><a href="single-product-tab-style-left.html">Single Product Tab Style Left</a></li>
+                                    <li><a href="single-product-tab-style-right.html">Single Product Tab Style Right</a></li>
+                                </ul>
+                            </li>
 
-                <li class="mega-menu-item"><a href="single-product.html" class="mega-item-title">Single
-                    Products</a>
-                    <ul>
-                        <li><a href="single-product.html">Single Product</a></li>
-                        <li><a href="single-product-sale.html">Single Product Sale</a></li>
-                        <li><a href="single-product-group.html">Single Product Group</a></li>
-                        <li><a href="single-product-normal.html">Single Product Normal</a></li>
-                        <li><a href="single-product-affiliate.html">Single Product Affiliate </a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li class="dropdown-show"><a href="#" class="arrow-toggle">Men</a>
-            <ul class="mega-menu-wrap dropdown-nav">
-                <li class="mega-menu-item"><a href="shop-list.html" class="mega-item-title">Shirt</a>
-                    <ul>
-                        <li><a href="shop.html">Tops & Tees</a></li>
-                        <li><a href="shop.html">Polo Short Sleeve</a></li>
-                        <li><a href="shop.html">Graphic T-Shirts</a></li>
-                        <li><a href="shop.html">Jackets & Coats</a></li>
-                        <li><a href="shop.html">Fashion Jackets</a></li>
-                    </ul>
-                </li>
+                            <li class="mega-menu-item"><a href="single-product.html" class="mega-item-title">Single
+                                Products</a>
+                                <ul>
+                                    <li><a href="single-product.html">Single Product</a></li>
+                                    <li><a href="single-product-sale.html">Single Product Sale</a></li>
+                                    <li><a href="single-product-group.html">Single Product Group</a></li>
+                                    <li><a href="single-product-normal.html">Single Product Normal</a></li>
+                                    <li><a href="single-product-affiliate.html">Single Product Affiliate </a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-show"><a href="#" class="arrow-toggle">Men</a>
+                        <ul class="mega-menu-wrap dropdown-nav">
+                            <li class="mega-menu-item"><a href="shop-list.html" class="mega-item-title">Shirt</a>
+                                <ul>
+                                    <li><a href="shop.html">Tops & Tees</a></li>
+                                    <li><a href="shop.html">Polo Short Sleeve</a></li>
+                                    <li><a href="shop.html">Graphic T-Shirts</a></li>
+                                    <li><a href="shop.html">Jackets & Coats</a></li>
+                                    <li><a href="shop.html">Fashion Jackets</a></li>
+                                </ul>
+                            </li>
 
-                <li class="mega-menu-item"><a href="shop-list.html" class="mega-item-title">Jeans</a>
-                    <ul>
-                        <li><a href="shop.html">Crochet</a></li>
-                        <li><a href="shop.html">Sleeveless</a></li>
-                        <li><a href="shop.html">Stripes</a></li>
-                        <li><a href="shop.html">Sweaters</a></li>
-                        <li><a href="shop.html">Hoodies</a></li>
-                    </ul>
-                </li>
+                            <li class="mega-menu-item"><a href="shop-list.html" class="mega-item-title">Jeans</a>
+                                <ul>
+                                    <li><a href="shop.html">Crochet</a></li>
+                                    <li><a href="shop.html">Sleeveless</a></li>
+                                    <li><a href="shop.html">Stripes</a></li>
+                                    <li><a href="shop.html">Sweaters</a></li>
+                                    <li><a href="shop.html">Hoodies</a></li>
+                                </ul>
+                            </li>
 
-                <li class="mega-menu-item"><a href="shop-list.html"
-                                              class="mega-item-title">Shoes</a>
-                    <ul>
-                        <li><a href="shop.html">Tops & Tees</a></li>
-                        <li><a href="shop.html">Polo Short Sleeve</a></li>
-                        <li><a href="shop.html">Graphic T-Shirts</a></li>
-                        <li><a href="shop.html">Jackets & Coats</a></li>
-                        <li><a href="shop.html">Fashion Jackets</a></li>
-                    </ul>
-                </li>
+                            <li class="mega-menu-item"><a href="shop-list.html"
+                                                        class="mega-item-title">Shoes</a>
+                                <ul>
+                                    <li><a href="shop.html">Tops & Tees</a></li>
+                                    <li><a href="shop.html">Polo Short Sleeve</a></li>
+                                    <li><a href="shop.html">Graphic T-Shirts</a></li>
+                                    <li><a href="shop.html">Jackets & Coats</a></li>
+                                    <li><a href="shop.html">Fashion Jackets</a></li>
+                                </ul>
+                            </li>
 
-                <li class="mega-menu-item"><a href="shop-list.html"
-                                              class="mega-item-title">Watches</a>
-                    <ul>
-                        <li><a href="shop.html">Crochet</a></li>
-                        <li><a href="shop.html">Sleeveless</a></li>
-                        <li><a href="shop.html">Stripes</a></li>
-                        <li><a href="shop.html">Sweaters</a></li>
-                        <li><a href="shop.html">Hoodies</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li class="dropdown-show"><a href="#" class="arrow-toggle">Pages</a>
-            <ul class="dropdown-nav">
-                <li><a href="cart.html">Shopping Cart</a></li>
-                <li><a href="checkout.html">Checkout</a></li>
-                <li><a href="compare.html">Compare</a></li>
-                <li><a href="wishlist.html">Wishlist</a></li>
-                <li><a href="login-register.html">Login & Register</a></li>
-                <li><a href="my-account.html">My Account</a></li>
-                <li><a href="404.html">404 Error</a></li>
-            </ul>
-        </li>
-        <li class="dropdown-show"><a href="#" class="arrow-toggle">Blog</a>
-            <ul class="dropdown-nav">
-                <li><a href="blog.html">Blog Left Sidebar</a></li>
-                <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                <li><a href="blog-grid.html">Blog Grid Layout</a></li>
-                <li><a href="single-blog.html">Single Blog</a></li>
-                <li><a href="single-blog-right-sidebar.html">Single Blog Right Sidebar</a></li>
-            </ul>
-        </li>
-        <li><a href="contact.html">Contact Us</a></li>
-    </ul>
+                            <li class="mega-menu-item"><a href="shop-list.html"
+                                                        class="mega-item-title">Watches</a>
+                                <ul>
+                                    <li><a href="shop.html">Crochet</a></li>
+                                    <li><a href="shop.html">Sleeveless</a></li>
+                                    <li><a href="shop.html">Stripes</a></li>
+                                    <li><a href="shop.html">Sweaters</a></li>
+                                    <li><a href="shop.html">Hoodies</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-show"><a href="#" class="arrow-toggle">Pages</a>
+                        <ul class="dropdown-nav">
+                            <li><a href="cart.html">Shopping Cart</a></li>
+                            <li><a href="checkout.html">Checkout</a></li>
+                            <li><a href="compare.html">Compare</a></li>
+                            <li><a href="wishlist.html">Wishlist</a></li>
+                            <li><a href="login-register.html">Login & Register</a></li>
+                            <li><a href="my-account.html">My Account</a></li>
+                            <li><a href="404.html">404 Error</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-show"><a href="#" class="arrow-toggle">Blog</a>
+                        <ul class="dropdown-nav">
+                            <li><a href="blog.html">Blog Left Sidebar</a></li>
+                            <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                            <li><a href="blog-grid.html">Blog Grid Layout</a></li>
+                            <li><a href="single-blog.html">Single Blog</a></li>
+                            <li><a href="single-blog-right-sidebar.html">Single Blog Right Sidebar</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
 </nav>
                     </div>
                 </div>

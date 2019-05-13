@@ -189,7 +189,56 @@ if($_GET['kategorisil']=="ok"){
         header("Location:../production/kategori-ekle.php?durum=no");
     }
     }
+
+
+
+
+//slider ekle
+    if (isset($_POST['sliderekle'])) {
+        $ekle=$db->prepare("INSERT INTO slider SET
+        slider_name = :slider_name,
+        slider_yol = :slider_yol,
+        slider_sira = :slider_sira,
+        slider_link = :slider_link
+        ");
+        $insert=$ekle->execute(array(
+        'slider_name'=>$_POST['slider_name'],
+        'slider_yol'=>$_POST['slider_yol'],
+        'slider_sira'=>$_POST['slider_sira'],
+        'slider_link'=>$_POST['slider_link']
+        ));
+    if ($insert) {
+        header("Location:../production/slider.php?durum=ok");
+    }else{
+        header("Location:../production/slider-ekle.php?durum=no");
+    }
+    }
     
+
+    //slider düzenle
+if(isset($_POST['sliderduzenle'])){
+  
+ 
+$sliderkaydet=$db->prepare("UPDATE slider SET
+    slider_name = :slider_name,
+    slider_yol = :slider_yol,
+    slider_sira = :slider_sira,
+    slider_link = :slider_link
+    WHERE id = {$_POST['id']} ");
+
+$update=$sliderkaydet->execute(array(
+    'slider_name'=> $_POST['slider_name'],
+    'slider_yol'=> $_POST['slider_yol'],
+    'slider_sira'=> $_POST['slider_sira'],
+    'slider_link'=> $_POST['slider_link']
+
+));
+if($update){
+    header("Location:../production/slider.php?durum=ok");
+}else{
+    header("Location:../production/slider-duzenle.php?durum=no");
+}
+}
 
 
 ?>

@@ -15,10 +15,10 @@
 #RewriteRule ^(.*)$ $1.php
 
 #404 hata sayfası yönlendirme kodu
-#ErrorDocument 404 http://www.Arabul.com
+ErrorDocument 404 http://localhost/proje/tema/404.php
 
 
-
+RewriteRule ^sayfa-([0-9a-zA-Z-_]+)-([0-9]+)$  index.php?sef=$1 [L,QSA]
 
 
 

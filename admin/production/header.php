@@ -96,6 +96,7 @@ if ($say==0) {
                 <li><a href="kullanici.php"><i class="fa fa-user"></i> Kullanıcılar </a></li>
 
                 <li><a href="kategori.php"><i class="fa fa-bookmark"></i> Kategori </a></li>
+                <li><a href="slider.php"><i class="fa fa-image"></i> Slider </a></li>
 
                   <li><a><i class="fa fa-cogs"></i> Ayarlar <span class="fa fa-cogs"></span></a>
                     <ul class="nav child_menu">
