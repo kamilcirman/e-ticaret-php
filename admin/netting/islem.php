@@ -276,7 +276,7 @@ if (isset($_POST['sliderekle'])) {
 	} else {
 
 		Header("Location:../production/slider.php?durum=no");
-	    }
+	}
     }
 
     //slider düzenle
