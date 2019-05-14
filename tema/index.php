@@ -10,19 +10,23 @@ include 'header.php';
             <div class="col-lg-9 ml-auto">
                 <div class="slider-offer-content">
                     <div class="row">
-                        <!-- Slider content Start -->
+                        <!-- Slider content Start -->     
+                        <?php  $slidersor=$db->prepare("SELECT * FROM slider ");
+                                    $slidersor->execute();
+                                    
+
+                                    while($slidercek=$slidersor->fetch(PDO::FETCH_ASSOC)); { ?> 
                         <div class="col-lg-8">
                             <div class="slider-carousel owl-carousel">
                                 <div class="single-slide-item">
-                                    <a href="#"><img src="assets/img/home3-slider-img-1.jpg" alt="Slide"></a>
-                                </div>
-                                <div class="single-slide-item">
-                                    <a href="#"><img src="assets/img/home3-slider-img-2.jpg" alt="Slide"></a>
+                                    <a href="#"><img src="<?php echo $slidercek['slider_resim'] ?>" alt=""></a>
                                 </div>
                             </div>
                         </div>
+                        <?php }?>
+                       
                         <!-- Slider content End -->
-
+                                   
                         <!-- Spacial Offer Start  -->
                         <div class="col-lg-4">
                             <div class="spacial-offer-wrap">
