@@ -29,33 +29,6 @@ $kullanicisor->execute(array(
 }
 
 
- //kullanıcı güncelleme
-if(isset($_POST['kullaniciguncelle'])){
-   
-$userkaydet=$db->prepare("UPDATE users SET
-    username = :username,
-    email = :email,
-    password =:password,
-    name = :name,
-    surname = :surname,
-    created_at = :created_at,
-    updated_at = :updated_at
-    WHERE id =  {$_POST['id']} ");
-$update=$userkaydet->execute(array(
-    'username'=> $_POST['username'],
-    'email'=> $_POST['email'],
-    'password'=>$_POST['password'],
-    'name'=> $_POST['name'],
-    'surname'=> $_POST['surname'],
-    'created_at'=> $_POST['created_at'],
-    'updated_at'=> $_POST['updated_at']
-));
-if($update){
-    header("Location:../production/kullanici-duzenle.php?durum=ok");
-}else{
-    header("Location:../production/kullanici-duzenle.php?durum=no");
-}
-}
 
 
 
@@ -105,6 +78,47 @@ if($update){
     header("Location:../production/hakkimizda.php?durum=no");
 }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ //kullanıcı güncelleme
+ if(isset($_POST['kullaniciguncelle'])){
+   
+    $userkaydet=$db->prepare("UPDATE users SET
+        username = :username,
+        email = :email,
+        password =:password,
+        name = :name,
+        surname = :surname,
+        created_at = :created_at,
+        updated_at = :updated_at
+        WHERE id =  {$_POST['id']} ");
+    $update=$userkaydet->execute(array(
+        'username'=> $_POST['username'],
+        'email'=> $_POST['email'],
+        'password'=>$_POST['password'],
+        'name'=> $_POST['name'],
+        'surname'=> $_POST['surname'],
+        'created_at'=> $_POST['created_at'],
+        'updated_at'=> $_POST['updated_at']
+    ));
+    if($update){
+        header("Location:../production/kullanici-duzenle.php?durum=ok");
+    }else{
+        header("Location:../production/kullanici-duzenle.php?durum=no");
+    }
+    }
 //kullanıcı sil
 
 if($_GET['kullanicisil']=="ok"){
@@ -120,6 +134,18 @@ if ($kontrol) {
     header("location:../production/kullanici.php?sil=no");
 }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 // kategori düzenle
 
 if(isset($_POST['kategoriduzenle'])){
@@ -193,52 +219,105 @@ if($_GET['kategorisil']=="ok"){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //slider ekle
-    if (isset($_POST['sliderekle'])) {
-        $ekle=$db->prepare("INSERT INTO slider SET
+
+
+if (isset($_POST['sliderekle'])) {
+
+
+	$uploads_dir = '../../dimg/slider';
+	@$tmp_name = $_FILES['slider_resim']["tmp_name"];
+	@$name = $_FILES['slider_resim']["name"];
+	//resmin isminin benzersiz olması
+	$benzersizsayi1=rand(20000,32000);
+	$benzersizsayi2=rand(20000,32000);
+	$benzersizsayi3=rand(20000,32000);
+	$benzersizsayi4=rand(20000,32000);	
+	$benzersizad=$benzersizsayi1.$benzersizsayi2.$benzersizsayi3.$benzersizsayi4;
+	$refimgyol=substr($uploads_dir, 6)."/".$benzersizad.$name;
+	@move_uploaded_file($tmp_name, "$uploads_dir/$benzersizad$name");
+	
+
+
+	$kaydet=$db->prepare("INSERT INTO slider SET
+		slider_name=:slider_name,
+		slider_yol=:slider_yol,
+		slider_sira=:slider_sira,
+        slider_link=:slider_link,
+		slider_resim=:slider_resim
+		");
+	$insert=$kaydet->execute(array(
+		'slider_name' => $_POST['slider_name'],
+		'slider_yol' => $_POST['slider_yol'],
+        'slider_sira' => $_POST['slider_sira'],
+        'slider_link' => $_POST['slider_link'],
+		'slider_resim' => $refimgyol
+		));
+
+	if ($insert) {
+
+		Header("Location:../production/slider.php?durum=ok");
+
+	} else {
+
+		Header("Location:../production/slider.php?durum=no");
+	    }
+    }
+
+    //slider düzenle
+    if(isset($_POST['sliderduzenle'])){
+    
+    
+    $sliderkaydet=$db->prepare("UPDATE slider SET
         slider_name = :slider_name,
         slider_yol = :slider_yol,
         slider_sira = :slider_sira,
-        slider_link = :slider_link
-        ");
-        $insert=$ekle->execute(array(
-        'slider_name'=>$_POST['slider_name'],
-        'slider_yol'=>$_POST['slider_yol'],
-        'slider_sira'=>$_POST['slider_sira'],
-        'slider_link'=>$_POST['slider_link']
-        ));
-    if ($insert) {
+        slider_link = :slider_link,
+        slider_resim = :slider_resim
+    WHERE id = $_POST[id]");
+
+    $update=$sliderkaydet->execute(array(
+        'slider_name'=> $_POST['slider_name'],
+        'slider_yol'=> $_POST['slider_yol'],
+        'slider_sira'=> $_POST['slider_sira'],
+        'slider_link'=> $_POST['slider_link'],
+        'slider_resim'=> $_POST['slider_resim']
+
+    ));
+    if($update){
         header("Location:../production/slider.php?durum=ok");
     }else{
-        header("Location:../production/slider-ekle.php?durum=no");
+        header("Location:../production/slider-duzenle.php?durum=no");
     }
     }
+//slider sil
+if($_GET['slidersil']=="ok"){
+    $sil=$db->prepare("DELETE from slider where id=:id");
+    $kontrol=$sil->execute(array(
     
-
-    //slider düzenle
-if(isset($_POST['sliderduzenle'])){
-  
- 
-$sliderkaydet=$db->prepare("UPDATE slider SET
-    slider_name = :slider_name,
-    slider_yol = :slider_yol,
-    slider_sira = :slider_sira,
-    slider_link = :slider_link
-    WHERE id = {$_POST['id']} ");
-
-$update=$sliderkaydet->execute(array(
-    'slider_name'=> $_POST['slider_name'],
-    'slider_yol'=> $_POST['slider_yol'],
-    'slider_sira'=> $_POST['slider_sira'],
-    'slider_link'=> $_POST['slider_link']
-
-));
-if($update){
-    header("Location:../production/slider.php?durum=ok");
-}else{
-    header("Location:../production/slider-duzenle.php?durum=no");
-}
-}
-
+        'id'=>$_GET['id']
+    ));
+    if ($kontrol) {
+        header("location:../production/slider.php?sil=ok");
+    }
+    if ($kontrol) {
+        header("location:../production/slider.php?sil=no");
+    }
+    }
 
 ?>
