@@ -51,10 +51,12 @@ $slidersor->execute();
             <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
+                  <th>sıra</th>
                   <th>slider_name</th>
                   <th>slider_yol</th>
                   <th>slider_sira</th>
                   <th>slider_link</th>
+                  <th>slider_resim</th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -74,6 +76,7 @@ $slidersor->execute();
                   <td><?php echo $slidercek['slider_yol']?></td>
                   <td><?php echo $slidercek['slider_sira']?></td>
                   <td><?php echo $slidercek['slider_link']?></td>
+                  <td><?php echo $slidercek['slider_resim']?></td>
                 
                   
                   <!--sıkıntı var aktif pasif yemiyor
