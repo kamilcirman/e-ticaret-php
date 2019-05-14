@@ -3,7 +3,7 @@ include 'header.php';
 
 $slidersor=$db->prepare("SELECT * FROM slider ");
 $slidersor->execute(array(
-  'id' =>$_GET['id']
+  'id' => $_GET['id']
 
 ));
 
@@ -84,13 +84,20 @@ $slidercek=$slidersor->fetch(PDO::FETCH_ASSOC);
                           <input type="text" id="first-name" name="slider_link" value="<?php echo $slidercek['slider_link']?>" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">slider_resim <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="file" id="first-name" name="slider_resim" value="<?php echo $slidercek['slider_resim']?>" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
                       
 
                       <input type="hidden" name="id" value="<?php echo $slidercek['id']?>">
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div align ="right" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button type="submit" name="sliderduzenle" class="btn btn-success">Güncelle</button>
+                          <button type="submit" name="sliderduzenle"  class="btn btn-success">Güncelle</button>
                         </div>
                       </div>
 
