@@ -86,22 +86,21 @@ $slidercek=$slidersor->fetch(PDO::FETCH_ASSOC);
                       </div>
                       <form action="../netting/islem.php" method="POST" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Yüklü Resim <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <img width="300" src="../../dimg/slider<?php echo $slidercek['slider_resim']; ?>">
-                                </div>
+                      <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Yüklü Resim <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <img width="300" height="200" src="../../dimg/slider<?php echo $slidercek['slider_resim']; ?>">
                             </div>
+                      </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Resim Seç<span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="file" id="first-name"  name="slider_resim"  class="form-control col-md-7 col-xs-12">
-                                </div>
-                            </div>
+                        <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Resim Seç<span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="file" id="first-name"  name="slider_resim"  class="form-control col-md-7 col-xs-12">
+                              </div>
+                       </div>
                       
 
                       <input type="hidden" name="id" value="<?php echo $slidercek['id']?>">

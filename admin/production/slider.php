@@ -76,7 +76,7 @@ $slidersor->execute();
                   <td><?php echo $slidercek['slider_yol']?></td>
                   <td><?php echo $slidercek['slider_sira']?></td>
                   <td><?php echo $slidercek['slider_link']?></td>
-                  <td><img width="200" src="../../<?php echo $slidercek['slider_resim'] ?>"></td>
+                  <td><img width="200" src="../../dimg/<?php echo $slidercek['slider_resim'] ?>"></td>
                 
                   
                   <!--sıkıntı var aktif pasif yemiyor
