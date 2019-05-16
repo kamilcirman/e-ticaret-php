@@ -1,6 +1,6 @@
 <?php
-include '../admin/netting/baglan.php';
-include '../admin/production/fonksiyon.php';
+include 'admin/netting/baglan.php';
+include 'admin/production/fonksiyon.php';
 
 
 

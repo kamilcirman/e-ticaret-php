@@ -93,7 +93,7 @@ if($update){
 
 
  //kullanıcı güncelleme
- if(isset($_POST['kullaniciguncelle'])){
+ if(isset($_GET['kullanicisil']) && $_GET['kullanicisil']){
    
     $userkaydet=$db->prepare("UPDATE users SET
         username = :username,
@@ -313,27 +313,83 @@ if(isset($_GET['slidersil']) && $_GET['slidersil']=='ok'){
 
     
   //register kaydet
-   if (isset($_GET['registerkaydet']) && $_GET['registerkaydet']=='ok') {
-    $ekle=$db->prepare("INSERT INTO users SET
-    username = :username,
-    email = :email,
-    password = :password,
-    name = :name,
-    surname = :surname
-    ");
-    $insert=$ekle->execute(array(
-    'username'=>$_POST['username'],
-    'email'=>$_POST['email'],
-  
-    'password'=>$_POST['password'],
-    'name'=>$_POST['name'],
-    'surname'=>$_POST['surname']
-    ));
-    if ($insert) {
-        header("Location:../../tema/index.php?durum=ok");
-    }else{
-        header("");
-    }
+   if (isset($_POST['registerkaydet'])) {
+
+       $username = htmlspecialchars($_POST['username']);
+       $email = htmlspecialchars($_POST['email']);
+       $name = htmlspecialchars($_POST['name']);
+       $surname = htmlspecialchars($_POST['surname']);
+       $passwordone = $_POST['passwordone'];
+       $passwordtwo = $_POST['passwordtwo'];
+    if ($passwordone==$passwordtwo) {
+        if ($passwordone>=6) {
+            
+              //başla
+
+
+			$registersor=$db->prepare("SELECT * from users where username=:username");
+			$registersor->execute(array(
+				'username' => $username
+				));
+
+			//dönen satır sayısını belirtir
+			$say=$registersor->rowCount();
+
+			if ($say==0) {
+
+				//md5 fonksiyonu şifreyi md5 şifreli hale getirir.
+				$password=md5($passwordone);
+
+			//Kullanıcı kayıt işlemi yapılıyor...
+				$registerkaydet=$db->prepare("INSERT INTO users SET
+					username=:username,
+					email=:email,
+					password=:password,
+					name=:name,
+                    surname=:surname
+					");
+				$insert=$registerkaydet->execute(array(
+					'username' => $username,
+					'email' => $email,
+					'password' => $password,
+                    'name' => $name,
+                    'surname' => $surname
+					));
+
+				if ($insert) {
+
+					header("Location:../../index.php?durum=loginbasarili");
+
+
+				//Header("Location:../production/genel-ayarlar.php?durum=ok");
+
+				} else {
+
+					header("Location:../../login-register.php?durum=basarisiz");
+				}
+
+			} else {
+
+				header("Location:../../login-register.php?durum=mukerrerkayit");
+
+			}
+
+            //bit
+
+
+
+
+        }else {
+            header("Location:../../login-register.php?durum=eksiksifre");
+        }
+
+          
+        }else {
+            header("Location:../../login-register.php?durum=farklisifre");
+
+        }
+
+
    }
 
 ?>

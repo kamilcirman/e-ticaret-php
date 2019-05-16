@@ -66,8 +66,38 @@ include 'header.php';
                 <div class="col-lg-7 mt-30 mt-lg-0">
                     <div class="login-reg-form-wrap">
                         <h2>KAYIT OL</h2>
-                        <form action="../admin/netting/islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                        <form action="admin/netting/islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                      <!--   <form action="../admin/netting/islem.php" method="POST"> -->
+                            <!-- şifre kontrol-->
+                                 <?php 
+
+                                if ($_GET['durum']=="farklisifre") {?>
+
+                                <div class="alert alert-danger">
+                                    <strong>Hata!</strong> Girdiğiniz şifreler eşleşmiyor.
+                                </div>
+                                    
+                                <?php } elseif ($_GET['durum']=="eksiksifre") {?>
+
+                                <div class="alert alert-danger">
+                                    <strong>Hata!</strong> Şifreniz minimum 6 karakter uzunluğunda olmalıdır.
+                                </div>
+                                    
+                                <?php } elseif ($_GET['durum']=="mukerrerkayit") {?>
+
+                                <div class="alert alert-danger">
+                                    <strong>Hata!</strong> Bu kullanıcı daha önce kayıt edilmiş.
+                                </div>
+                                    
+                                <?php } elseif ($_GET['durum']=="basarisiz") {?>
+
+                                <div class="alert alert-danger">
+                                    <strong>Hata!</strong> Kayıt Yapılamadı Sistem Yöneticisine Danışınız.
+                                </div>
+                                    
+                                <?php }
+                                ?>
+                     
                             <div class="single-input-item">
                                 <input type="text" name="username" placeholder="username" required />
                             </div>
@@ -81,6 +111,7 @@ include 'header.php';
                             <div class="single-input-item">
                                 <input type="text" name="name" placeholder="name" required />
                             </div>
+                            
                             <div class="single-input-item">
                                 <input type="text" name="surname" placeholder="surname" required />
                             </div>
@@ -88,13 +119,13 @@ include 'header.php';
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="single-input-item">
-                                        <input type="password" name="password" placeholder="Enter your Password" required />
+                                        <input type="password" name="passwordone" placeholder="Enter your Password" required />
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="single-input-item">
-                                        <input type="password" name="password" placeholder="Repeat your Password" required />
+                                        <input type="password" name="passwordtwo" placeholder="Repeat your Password" required />
                                     </div>
                                 </div>
                             </div>
