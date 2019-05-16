@@ -11,19 +11,21 @@ include 'header.php';
                 <div class="slider-offer-content">
                     <div class="row">
                         <!-- Slider content Start -->     
+                  
+                        <div class="col-lg-8">
                         <?php  $slidersor=$db->prepare("SELECT * FROM slider ");
                                     $slidersor->execute();
                                     
 
                                     while($slidercek=$slidersor->fetch(PDO::FETCH_ASSOC)); { ?> 
-                        <div class="col-lg-8">
                             <div class="slider-carousel owl-carousel">
                                 <div class="single-slide-item">
-                                    <a href="#"><img src="<?php echo $slidercek['slider_resim'] ?>" alt=""></a>
+                                    <a href="<?php echo $slidercek['slider_link']?>"><img src="<?php echo $slidercek['slider_resim'] ?>" alt="" class="img-responsive"></a>
                                 </div>
                             </div>
+                            <?php }?>
                         </div>
-                        <?php }?>
+                       
                        
                         <!-- Slider content End -->
                                    

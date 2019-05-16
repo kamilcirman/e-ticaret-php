@@ -121,19 +121,19 @@ if($update){
     }
 //kullanıcı sil
 
-if($_GET['kullanicisil']=="ok"){
-$sil=$db->prepare("DELETE from users where id= :id");
-$kontrol=$sil->execute(array(
+        if(isset($_GET['kullanicisil']) && $_GET['kullanicisil']=='ok'){
+        $sil=$db->prepare("DELETE FROM users WHERE id= :id");
+        $kontrol=$sil->execute(array(
 
-    'id'=>$_GET['id']
-));
-if ($kontrol) {
-    header("location:../production/kullanici.php?sil=ok");
-}
-if ($kontrol) {
-    header("location:../production/kullanici.php?sil=no");
-}
-}
+            'id'=>$_GET['id']
+        ));
+        if ($kontrol) {
+            header("location:../production/kullanici.php?sil=ok");
+        }
+        if ($kontrol) {
+            header("location:../production/kullanici.php?sil=no");
+        }
+        }
 
 
 
@@ -178,7 +178,7 @@ if($update){
 }
 //kategori silme
 
-if($_GET['kategorisil']=="ok"){
+if(isset($_GET['kategorisil']) && $_GET['kategorisil']=='ok'){
     $sil=$db->prepare("DELETE from categories where id= :id");
     $kontrol=$sil->execute(array(
     
@@ -215,18 +215,6 @@ if($_GET['kategorisil']=="ok"){
         header("Location:../production/kategori-ekle.php?durum=no");
     }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -306,8 +294,8 @@ if (isset($_POST['sliderekle'])) {
     }
     }
 //slider sil
-if($_GET['slidersil']=="ok"){
-    $sil=$db->prepare("DELETE from slider where id=:id");
+if(isset($_GET['slidersil']) && $_GET['slidersil']=='ok'){
+    $sil=$db->prepare("DELETE FROM slider WHERE id=:id");
     $kontrol=$sil->execute(array(
     
         'id'=>$_GET['id']
@@ -319,5 +307,33 @@ if($_GET['slidersil']=="ok"){
         header("location:../production/slider.php?sil=no");
     }
     }
+
+
+
+
+    
+  //register kaydet
+   if (isset($_GET['registerkaydet']) && $_GET['registerkaydet']=='ok') {
+    $ekle=$db->prepare("INSERT INTO users SET
+    username = :username,
+    email = :email,
+    password = :password,
+    name = :name,
+    surname = :surname
+    ");
+    $insert=$ekle->execute(array(
+    'username'=>$_POST['username'],
+    'email'=>$_POST['email'],
+  
+    'password'=>$_POST['password'],
+    'name'=>$_POST['name'],
+    'surname'=>$_POST['surname']
+    ));
+    if ($insert) {
+        header("Location:../../tema/index.php?durum=ok");
+    }else{
+        header("");
+    }
+   }
 
 ?>

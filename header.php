@@ -101,7 +101,7 @@ $adrescek=$adressor->fetch(PDO::FETCH_ASSOC);
                         <ul class="nav justify-content-center justify-content-md-end">
                             <li><a href="my-account.html">My Account</a></li>
                             <li><a href="wishlist.html">Wishlist</a></li>
-                            <li><a href="login-register.html">Sign In</a></li>
+                            <li><a href="login-register.php">Sign In</a></li>
                             <li class="switcher dropdown-show"><a href="#" class="arrow-toggle">English</a>
                                 <ul class="dropdown-nav">
                                     <li><a href="#">Bengali</a></li>
@@ -255,20 +255,13 @@ $adrescek=$adressor->fetch(PDO::FETCH_ASSOC);
                                 else{
                                     echo "sayfa-".seo($kategoricek['category_name']);
                                 }
-
-
                                 ?>" 
                                 class="category-item arrow-toggle">
                                     <span><?php echo $kategoricek['category_name']?></span>
                                 </a>
                         <?php }?>
                                 
-                            </li>
-
-                            
-                           
-                            
-                          
+                            </li>                  
                             
                             <li class="category-item-parent">
                                 <a href="#" class="category-item btn-more">More Categories</a>
