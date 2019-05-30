@@ -71,25 +71,25 @@ include 'header.php';
                             <!-- şifre kontrol-->
                                  <?php 
 
-                                if ($_GET['durum']=="farklisifre") {?>
+                                if (isset($_GET['durum']) && $_GET['durum']=="farklisifre") {?>
 
                                 <div class="alert alert-danger">
                                     <strong>Hata!</strong> Girdiğiniz şifreler eşleşmiyor.
                                 </div>
                                     
-                                <?php } elseif ($_GET['durum']=="eksiksifre") {?>
+                                <?php } elseif (isset($_GET['durum']) && $_GET['durum']=="eksiksifre") {?>
 
                                 <div class="alert alert-danger">
                                     <strong>Hata!</strong> Şifreniz minimum 6 karakter uzunluğunda olmalıdır.
                                 </div>
                                     
-                                <?php } elseif ($_GET['durum']=="mukerrerkayit") {?>
+                                <?php } elseif (isset($_GET['durum']) && $_GET['durum']=="mukerrerkayit") {?>
 
                                 <div class="alert alert-danger">
                                     <strong>Hata!</strong> Bu kullanıcı daha önce kayıt edilmiş.
                                 </div>
                                     
-                                <?php } elseif ($_GET['durum']=="basarisiz") {?>
+                                <?php } elseif (isset($_GET['durum']) && $_GET['durum']=="basarisiz") {?>
 
                                 <div class="alert alert-danger">
                                     <strong>Hata!</strong> Kayıt Yapılamadı Sistem Yöneticisine Danışınız.

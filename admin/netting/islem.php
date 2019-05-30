@@ -315,21 +315,21 @@ if(isset($_GET['slidersil']) && $_GET['slidersil']=='ok'){
   //register kaydet
    if (isset($_POST['registerkaydet'])) {
 
-       $username = htmlspecialchars($_POST['username']);
-       $email = htmlspecialchars($_POST['email']);
-       $name = htmlspecialchars($_POST['name']);
-       $surname = htmlspecialchars($_POST['surname']);
+      echo $username = htmlspecialchars($_POST['username']); echo "<br>";
+      echo $email = htmlspecialchars($_POST['email']); echo "<br>";
+      echo $name = htmlspecialchars($_POST['name']); echo "<br>";
+      echo $surname = htmlspecialchars($_POST['surname']); echo "<br>";
        $passwordone = $_POST['passwordone'];
-       $passwordtwo = $_POST['passwordtwo'];
+       $passwordtwo = $_POST['passwordtwo']; 
     if ($passwordone==$passwordtwo) {
-        if ($passwordone>=6) {
+        if (strlen($passwordone)>=6) {
             
               //başla
 
 
-			$registersor=$db->prepare("SELECT * from users where username=:username");
+			$registersor=$db->prepare("SELECT * FROM users WHERE username=:username");
 			$registersor->execute(array(
-				'username' => $username
+                'username' => $username
 				));
 
 			//dönen satır sayısını belirtir
@@ -344,7 +344,7 @@ if(isset($_GET['slidersil']) && $_GET['slidersil']=='ok'){
 				$registerkaydet=$db->prepare("INSERT INTO users SET
 					username=:username,
 					email=:email,
-					password=:password,
+					password=:passwordone,
 					name=:name,
                     surname=:surname
 					");
@@ -354,8 +354,8 @@ if(isset($_GET['slidersil']) && $_GET['slidersil']=='ok'){
 					'password' => $password,
                     'name' => $name,
                     'surname' => $surname
-					));
-
+                    ));
+                    
 				if ($insert) {
 
 					header("Location:../../index.php?durum=loginbasarili");
@@ -365,31 +365,25 @@ if(isset($_GET['slidersil']) && $_GET['slidersil']=='ok'){
 
 				} else {
 
-					header("Location:../../login-register.php?durum=basarisiz");
-				}
+					header("Location:../../login-register.php?durum=basarisiz");}
 
 			} else {
 
-				header("Location:../../login-register.php?durum=mukerrerkayit");
-
-			}
+				header("Location:../../login-register.php?durum=mukerrerkayit");}
 
             //bit
 
 
 
 
-        }else {
-            header("Location:../../login-register.php?durum=eksiksifre");
-        }
+            }else {
+                header("Location:../../login-register.php?durum=eksiksifre");}
 
-          
-        }else {
-            header("Location:../../login-register.php?durum=farklisifre");
+            
+            }else {
+                header("Location:../../login-register.php?durum=farklisifre");}
 
-        }
-
-
-   }
+    
+}
 
 ?>

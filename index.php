@@ -17,116 +17,21 @@ include 'header.php';
                                     $slidersor->execute();
                                     
 
-                                    while($slidercek=$slidersor->fetch(PDO::FETCH_ASSOC)); { ?> 
+                                    while($slidercek=$slidersor->fetch(PDO::FETCH_ASSOC)) {   ?> 
                             <div class="slider-carousel owl-carousel">
                                 <div class="single-slide-item">
                                     <a href="<?php echo $slidercek['slider_link']?>"><img src="<?php echo $slidercek['slider_resim'] ?>" alt="" class="img-responsive"></a>
                                 </div>
+                                <?php }?>
                             </div>
-                            <?php }?>
+                            
                         </div>
                        
                        
                         <!-- Slider content End -->
                                    
-                        <!-- Spacial Offer Start  -->
-                        <div class="col-lg-4">
-                            <div class="spacial-offer-wrap">
-                                <h3 class="title">Special offers</h3>
-                                <div class="spacial-product-wrap">
-                                    <div class="spacial-product-carousel owl-carousel">
-                                        <!-- Single Spacial Offer Start -->
-                                        <div class="single-product-item">
-                                            <div class="product-details">
-                                                <div class="rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half"></i>
-                                                </div>
-                                                <h2 class="product-title"><a href="single-product.html">Voyage Yoga
-                                                    Bag</a>
-                                                </h2>
-                                                <div class="price-box d-flex">
-                                                    <span class="product-price">$20.99</span>
-                                                    <del class="product-price sale">$40.99</del>
-                                                </div>
-                                            </div>
-                                            <figure class="product-thumb">
-                                                <a href="single-product.html"><img src="assets/img/product-5.jpg"
-                                                                                   alt="Product"></a>
-                                            </figure>
-
-                                            <div class="sale-countdown-wrap">
-                                                <div class="sale-countdown" data-date="10/20/2019"></div>
-                                            </div>
-                                        </div>
-                                        <!-- Single Spacial Offer End -->
-
-                                        <!-- Single Spacial Offer Start -->
-                                        <div class="single-product-item">
-                                            <div class="product-details">
-                                                <div class="rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half"></i>
-                                                </div>
-                                                <h2 class="product-title"><a href="single-product.html">Voyage Yoga
-                                                    Bag</a>
-                                                </h2>
-                                                <div class="price-box d-flex">
-                                                    <span class="product-price">$20.99</span>
-                                                    <del class="product-price sale">$40.99</del>
-                                                </div>
-                                            </div>
-                                            <figure class="product-thumb">
-                                                <a href="single-product.html"><img src="assets/img/product-2.jpg"
-                                                                                   alt="Product"></a>
-                                            </figure>
-
-                                            <div class="sale-countdown-wrap">
-                                                <div class="sale-countdown" data-date="10/20/2019"></div>
-                                            </div>
-                                        </div>
-                                        <!-- Single Spacial Offer End -->
-
-                                        <!-- Single Spacial Offer Start -->
-                                        <div class="single-product-item">
-                                            <div class="product-details">
-                                                <div class="rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half"></i>
-                                                </div>
-                                                <h2 class="product-title"><a href="single-product.html">Voyage Yoga
-                                                    Bag</a>
-                                                </h2>
-                                                <div class="price-box d-flex">
-                                                    <span class="product-price">$20.99</span>
-                                                    <del class="product-price sale">$40.99</del>
-                                                </div>
-                                            </div>
-                                            <figure class="product-thumb">
-                                                <a href="single-product.html"><img src="assets/img/product-1.jpg"
-                                                                                   alt="Product"></a>
-                                            </figure>
-
-                                            <div class="sale-countdown-wrap">
-                                                <div class="sale-countdown" data-date="10/20/2019"></div>
-                                            </div>
-                                        </div>
-                                        <!-- Single Spacial Offer End -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Spacial Offer End  -->
                     </div>
+                    
                 </div>
             </div>
         </div>
